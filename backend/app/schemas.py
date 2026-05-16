@@ -27,20 +27,42 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
+# class InterviewCreate(BaseModel):
+#     candidate_email: EmailStr
+#     title: str
+#     job_role: str
+
 class InterviewCreate(BaseModel):
     candidate_email: EmailStr
+    candidate_name: str = "Candidate"
     title: str
     job_role: str
+    scheduled_date: str = ""
+    scheduled_time: str = ""
+
+# class InterviewOut(BaseModel):
+#     id: str
+#     title: str
+#     job_role: str
+#     candidate_email: str
+#     status: InterviewStatus
+#     created_at: datetime
+#     class Config:
+#         from_attributes = True
 
 class InterviewOut(BaseModel):
     id: str
     title: str
     job_role: str
     candidate_email: str
+    candidate_name: str = "Candidate"
     status: InterviewStatus
+    scheduled_date: Optional[str] = None
+    scheduled_time: Optional[str] = None
     created_at: datetime
     class Config:
         from_attributes = True
+
 
 class QuestionOut(BaseModel):
     id: str
