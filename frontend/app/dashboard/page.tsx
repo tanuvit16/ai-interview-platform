@@ -634,9 +634,9 @@ export default function DashboardPage() {
     { label: "Scheduled", value: interviews.filter(i => i.status === "scheduled").length, icon: "📅", color: "#fbbf24" },
     { label: "Completed", value: interviews.filter(i => i.status === "completed").length, icon: "✅", color: "#34d399" },
   ] : [
-    { label: "Total Assigned", value: interviews.length, icon: "📋", color: "#818cf8" },
-    { label: "Pending", value: interviews.filter(i => i.status === "scheduled").length, icon: "⏳", color: "#fbbf24" },
-    { label: "Completed", value: interviews.filter(i => i.status === "completed").length, icon: "🏆", color: "#34d399" },
+    { label: "Total Assigned", value: interviews.length, icon: "", color: "#818cf8" },
+    { label: "Pending", value: interviews.filter(i => i.status === "scheduled").length, icon: "", color: "#fbbf24" },
+    { label: "Completed", value: interviews.filter(i => i.status === "completed").length, icon: "", color: "#34d399" },
   ];
 
   const font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
@@ -675,7 +675,7 @@ export default function DashboardPage() {
             border: `1px solid ${isRecruiter ? 'rgba(139,92,246,0.25)' : 'rgba(99,102,241,0.25)'}`,
             color: isRecruiter ? '#c4b5fd' : '#a5b4fc',
           }}>
-            <span>{isRecruiter ? '👔' : '🎯'}</span>
+            <span>{isRecruiter ? '' : ''}</span>
             <span style={{ textTransform: 'capitalize' }}>{user?.role}</span>
           </div>
         </div>

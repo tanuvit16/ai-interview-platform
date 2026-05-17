@@ -147,6 +147,7 @@ class Interview(Base):
     scheduled_date = Column(String, nullable=True)
     scheduled_time = Column(String, nullable=True)
     status = Column(Enum(InterviewStatus), default=InterviewStatus.scheduled)
+    is_disqualified = Column(String, nullable=True, default="false")
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     started_at = Column(DateTime(timezone=True), nullable=True)
     ended_at = Column(DateTime(timezone=True), nullable=True)

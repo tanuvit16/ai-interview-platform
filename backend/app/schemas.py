@@ -57,6 +57,7 @@ class InterviewOut(BaseModel):
     candidate_email: str
     candidate_name: str = "Candidate"
     status: InterviewStatus
+    is_disqualified: Optional[str] = "false"
     scheduled_date: Optional[str] = None
     scheduled_time: Optional[str] = None
     created_at: datetime
