@@ -630,9 +630,9 @@ export default function DashboardPage() {
   };
 
   const stats = isRecruiter ? [
-    { label: "Total Interviews", value: interviews.length, icon: "📋", color: "#818cf8" },
-    { label: "Scheduled", value: interviews.filter(i => i.status === "scheduled").length, icon: "📅", color: "#fbbf24" },
-    { label: "Completed", value: interviews.filter(i => i.status === "completed").length, icon: "✅", color: "#34d399" },
+    { label: "Total Interviews", value: interviews.length, icon: "", color: "#818cf8" },
+    { label: "Scheduled", value: interviews.filter(i => i.status === "scheduled").length, icon: "", color: "#fbbf24" },
+    { label: "Completed", value: interviews.filter(i => i.status === "completed").length, icon: "", color: "#34d399" },
   ] : [
     { label: "Total Assigned", value: interviews.length, icon: "", color: "#818cf8" },
     { label: "Pending", value: interviews.filter(i => i.status === "scheduled").length, icon: "", color: "#fbbf24" },
