@@ -1,20 +1,7 @@
-// export const Dynamic = "force-dynamic";
-// "use client";
-
-// import { useEffect, useState, useRef } from "react";
-// import { useRouter, useSearchParams } from "next/navigation";
-// import dynamic from "next/dynamic";
-// import API from "@/lib/api";
-
-// const MonacoEditor = nextDynamic(() => import("@monaco-editor/react"), {
-//   ssr: false,
-// });
-
-
+"use client";
 export const dynamic = "force-dynamic";
 
-"use client";
-
+import { Suspense } from "react";
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import nextDynamic from "next/dynamic";
@@ -77,9 +64,10 @@ function Timer({
   );
 }
 
-export default function InterviewPage() {
+function InterviewPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const interviewId = searchParams.get("id");
 
   const [interview, setInterview] = useState<any>(null);
@@ -164,90 +152,6 @@ export default function InterviewPage() {
     };
   }, []);
 
-  // const loadInterview = async () => {
-  //   try {
-  //     const res = await API.get(
-  //       `/api/interviews/${interviewId}`
-  //     );
-  // const loadInterview = async () => {
-  // try {
-  //   const res = await API.get(`/api/interviews/${interviewId}`);
-  //   setInterview(res.data);
-
-  //   // Block if disqualified
-  //   if (res.data.is_disqualified === "true") {
-  //     setDisqualified(true);
-  //     setAlreadyAttempted(true);
-  //     return;
-  //   }
-
-  //   // Block if completed
-  //   if (res.data.status === "completed") {
-  //     setAlreadyAttempted(true);
-  //     try {
-  //       const r = await API.get(`/api/reports/${interviewId}`);
-  //       setReport(r.data);
-  //     } catch {}
-  //     return;
-  //   }
-
-//     const qRes = await API.get(`/api/questions/${interviewId}`);
-//     if (qRes.data.length > 0) {
-//       setQuestions(qRes.data);
-//       if (res.data.status === "in_progress") {
-//         setStarted(true);
-//         startedRef.current = true;
-//         await startCamera();
-//       }
-//     }
-//   } catch { router.push("/dashboard"); }
-// };
-
-
-
-
-
-  //     setInterview(res.data);
-
-  //     if (res.data.status === "completed") {
-  //       setAlreadyAttempted(true);
-
-  //       if (res.data.is_disqualified === "true") {
-  //         setDisqualified(true);
-  //         return;
-  //       }
-
-  //       try {
-  //         const r = await API.get(
-  //           `/api/reports/${interviewId}`
-  //         );
-
-  //         setReport(r.data);
-  //       } catch (error) {}
-
-  //       return;
-  //     }
-
-  //     const qRes = await API.get(
-  //       `/api/questions/${interviewId}`
-  //     );
-
-  //     if (qRes.data.length > 0) {
-  //       setQuestions(qRes.data);
-
-  //       if (res.data.status === "in_progress") {
-  //         setStarted(true);
-
-  //         startedRef.current = true;
-
-  //         await startCamera();
-  //       }
-  //     }
-  //   } catch (error) {
-  //     router.push("/dashboard");
-  //   }
-  // };
-
 const loadInterview = async () => {
   try {
     const res = await API.get(`/api/interviews/${interviewId}`);
@@ -283,8 +187,6 @@ const loadInterview = async () => {
     router.push("/dashboard");
   }
 };
-
-
 
   const checkSchedule = (iv: any) => {
     if (!iv?.scheduled_date || !iv?.scheduled_time)
@@ -548,9 +450,6 @@ const loadInterview = async () => {
 
   const currentQ = questions[currentIdx];
 
-  // if (!interview) {
-  //   return <div>Loading...</div>;
-  // }
   if (!interview) return (
   <div style={{ minHeight: '100vh', background: '#060a12', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: font }}>
     <div style={{ textAlign: 'center' }}>
@@ -560,12 +459,6 @@ const loadInterview = async () => {
     <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
   </div>
 );
-
-  // if (disqualified) {
-  //   return <div>Disqualified</div>;
-  // }
-
-
 
   // ── DISQUALIFIED (check before alreadyAttempted) ──
 if (disqualified) return (
@@ -763,15 +656,10 @@ if (alreadyAttempted && !report) return (
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+export default function InterviewPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InterviewPageInner />
+    </Suspense>
+  );
+}
