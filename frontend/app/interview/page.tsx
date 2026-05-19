@@ -1,13 +1,31 @@
+// export const Dynamic = "force-dynamic";
+// "use client";
+
+// import { useEffect, useState, useRef } from "react";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import dynamic from "next/dynamic";
+// import API from "@/lib/api";
+
+// const MonacoEditor = nextDynamic(() => import("@monaco-editor/react"), {
+//   ssr: false,
+// });
+
+
+export const dynamic = "force-dynamic";
+
 "use client";
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import API from "@/lib/api";
 
-const MonacoEditor = dynamic(() => import("@monaco-editor/react"), {
-  ssr: false,
-});
+const MonacoEditor = nextDynamic(
+  () => import("@monaco-editor/react"),
+  {
+    ssr: false,
+  }
+);
 
 const font =
   "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
