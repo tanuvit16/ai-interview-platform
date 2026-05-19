@@ -20,7 +20,8 @@ function Timer({
   onExpire: () => void;
 }) {
   const [remaining, setRemaining] = useState(totalSeconds);
-  const ref = useRef<any>();
+  // const ref = useRef<any>();
+  const ref = useRef<any>(null);
 
   useEffect(() => {
     ref.current = setInterval(() => {
