@@ -54,13 +54,24 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="AI Interview Platform", version="1.0.0")
 
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=False,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # We'll restrict this after deployment
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
